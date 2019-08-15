@@ -4,8 +4,6 @@ import TaskSearchControl from './TaskSearchControl';
 import TaskSortControl from './TaskSortControl'
 
 
-
-
 class TaskControl extends Component {
 
     render() {
