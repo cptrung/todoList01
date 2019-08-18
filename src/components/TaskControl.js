@@ -11,7 +11,6 @@ class TaskControl extends Component {
             <div className="col-xs-7">
                 <div className="row">
                     <TaskSearchControl />
-                    {/* button clear */}
                     <TaskSortControl />
                 </div>
             </div>

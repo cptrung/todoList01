@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from './actions/index';
 
 import TaskList from './components/TaskList';
 import TaskControl from './components/TaskControl';
@@ -8,7 +10,23 @@ import './App.css';
 
 class App extends Component {
 
+
+   toggleFormTask = () => {
+    if(this.props.editing && this.props.editing.id !== ''){
+      this.props.openForm();
+
+    }else{
+       this.props.toggleForm();
+    }
+    this.props.onClearTaskFileds({
+      id:"",
+      name: '',
+      level: 'Medium'
+    })
+
+   }
    render() {
+      
       return (
          <div className="App">
             <div className="container">
@@ -18,31 +36,52 @@ class App extends Component {
                </div>
                <hr />
                <div className="row">
-                 <TaskControl/>
+                  <TaskControl />
                   {/* button add item */}
                   <div className="col-xs-5">
-                     <button type="button" className="btn btn-info btn-block">Add item</button>
+                     <button onClick={this.toggleFormTask} type="button" className="btn btn-info btn-block">Add item</button>
                   </div>
                </div>
-              <TaskList/>
+               <TaskList />
                {/* form add or eidit */}
                <div className="row">
                   <div className="col-md-6 col-md-offset-3">
-                     <div className="panel panel-info">
-                        <div className="panel-heading">
-                           <h3 className="panel-title">Add Item</h3>
-                           <h3 className="panel-title custom-times">x</h3>
-                        </div>
-                        {/* task form */}
-                       <TaskForm/>
-                     </div>
+                     {/* task form */}
+                     {this.props.isDisplayForm ? <TaskForm /> : ''}
                   </div>
                </div>
             </div>
          </div>
-
       );
    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+   return {
+      tasks: state.tasks,
+      isDisplayForm: state.isDisplayForm,
+      editing:state.editing
+   }
+}
+const mapDispatchToProps = (dispatch, props) => {
+   return {
+      toggleForm: () => { 
+         dispatch(actions.toggleForm()) 
+      },
+      closeForm: () => { 
+         dispatch(actions.closeForm())
+       },
+      openForm: () => { 
+         dispatch(actions.openForm()) 
+      },
+       deleteTask: (id) => { 
+        dispatch(actions.deleteTask(id)) 
+       },
+       onClearTaskFileds: (task) => {
+          dispatch(actions.editask(task))
+       }
+
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
