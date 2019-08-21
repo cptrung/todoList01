@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from './../actions/index';
 
 
 class TaskSortControl extends Component {
@@ -32,11 +33,11 @@ class TaskSortControl extends Component {
                         >
                             <option className="custom-font" value={0}>Sort by</option>
                             <option value={-1}>DESC</option>
-                            <option value={1}>INC</option>
+                            <option value={1}>ASC</option>
                         </select>
                     </div>
                     <div className="input-group">
-                        <button type="button" className="btn btn-success custom-desc">{parseInt(sortName) === 0 ? 'SORT BY' : parseInt(sortName) === -1 ? 'NAME DESC' : 'NAME INC'}</button>
+                        <button type="button" className="btn btn-success custom-desc">{parseInt(sortName) === 0 ? 'SORT BY' : parseInt(sortName) === -1 ? 'NAME DESC' : 'NAME ASC'}</button>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,11 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
-    return { }
+    return { 
+        sortTask:(sortName) => {
+            dispatch(actions.sortTask(sortName));
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskSortControl);

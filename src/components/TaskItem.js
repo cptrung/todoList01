@@ -8,13 +8,14 @@ import * as actions from './../actions/index';
 class TaskItem extends Component {
 
     onDeleteTask = (task) => {
-        this.props.deleteTask(task.id);
+        if(window.confirm('Confirm deleting the task tapping OK or Cancel if don’t want to delete the task')){
+          this.props.DeleteTaskRequest(task.id);
+        }
     }
 
     onEditTask = (task) => {
         this.props.openForm();
-        this.props.editask(task);
-        
+        this.props.TaskEditingRequest(task);    
     }
 
     render() {
@@ -37,8 +38,7 @@ class TaskItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-       
+    return {     
     }
  }
  const mapDispatchToProps = (dispatch, props) => {
@@ -52,15 +52,12 @@ const mapStateToProps = (state) => {
        openForm: () => { 
           dispatch(actions.openForm()) 
        },
-       deleteTask: (id) => { 
-        dispatch(actions.deleteTask(id)) 
+       DeleteTaskRequest: (id) => { 
+        dispatch(actions.DeleteTaskRequest(id)) 
        },
-       editask: (id) => { 
-        dispatch(actions.editask(id)) 
+       TaskEditingRequest: (task) => { 
+        dispatch(actions.TaskEditingRequest(task)) 
        },
-     
- 
- 
     }
  }
  

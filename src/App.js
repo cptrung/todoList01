@@ -74,11 +74,8 @@ const mapDispatchToProps = (dispatch, props) => {
       openForm: () => { 
          dispatch(actions.openForm()) 
       },
-       deleteTask: (id) => { 
-        dispatch(actions.deleteTask(id)) 
-       },
        onClearTaskFileds: (task) => {
-          dispatch(actions.editask(task))
+          dispatch(actions.TaskEditingRequest(task))
        }
 
    }

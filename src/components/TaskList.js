@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import * as actions from './../actions/index';
 
 import TaskItem from './TaskItem';
 
@@ -13,7 +14,6 @@ class TaskList extends Component {
          // search item
          if(keyword !== ''){
             listItem = listItem.filter((task) => {
-               console.log(task.name.toLowerCase().indexOf(keyword));
                return task.name.toLowerCase().indexOf(keyword) === -1;
             })
          }
@@ -25,13 +25,17 @@ class TaskList extends Component {
             else if(nameA < nameB) return -sortName;
             else return 0;
         });
-        // forach tasks
+        // foreach tasks
          result =  listItem.map( (item, index) => {
             return <TaskItem key = {index} item = {item} index = {index} />
          })
       }
       return result;   
    }
+   componentDidMount(){
+      this.props.CallAPIRequest();
+   }
+
 
    render() {
       const {tasks} = this.props;
@@ -69,7 +73,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
    return {
-
+      CallAPIRequest: () => {
+         dispatch(actions.CallAPIRequest());
+      }
    }
 }
 

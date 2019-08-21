@@ -10,7 +10,6 @@ class TaskSearchControl extends Component {
         this.state={
         keyword:''      
         }
-
     }
 
     onChange = (e) => {
@@ -18,7 +17,7 @@ class TaskSearchControl extends Component {
             keyword: e.target.value
         })
     }
-    onSearChTak = () => {
+    onSearChTaks = () => {
         this.props.searchTask(this.state.keyword);
     }
 
@@ -36,7 +35,7 @@ class TaskSearchControl extends Component {
                         name = 'keyword'
                     />
                     <div className="input-group-btn">
-                        <button onClick = {this.onSearChTak} className="btn btn-info" type="submit">
+                        <button onClick = {this.onSearChTaks} className="btn btn-info" type="submit">
                             <span >Clear</span>
                         </button>
                     </div>
@@ -47,14 +46,13 @@ class TaskSearchControl extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { }
+    return {}
  }
  const mapDispatchToProps = (dispatch, props) => {
     return {
-        searchTask:(keyword)=> {
+         searchTask:(keyword)=> {
             dispatch(actions.searchTask(keyword))
         }
- 
     }
  }
  

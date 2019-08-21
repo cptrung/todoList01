@@ -17,8 +17,15 @@ class TaskForm extends Component {
    }
 
     onSubmit = ( fields ) => {
-        this.props.addTask(fields);
-        this.props.closeForm();
+        console.log(fields);
+        if(fields.id === '') {
+            this.props.AddTaskRequest(fields);
+            this.props.closeForm();
+        }else{
+            this.props.UpdateTaskRequest(fields);
+            this.props.closeForm();
+        }
+        
     }
 
     // rest all filed form
@@ -32,8 +39,9 @@ class TaskForm extends Component {
     }
 
     componentWillMount(){
-       
+        console.log(this.props.editing);
         if(this.props.editing && this.props.editing.id != null ) {
+            console.log(this.props.editing);
             this.setState({
                 id:this.props.editing.id,
                 name:this.props.editing.name,
@@ -45,6 +53,7 @@ class TaskForm extends Component {
     }
     
     componentWillReceiveProps(nextProps){
+        console.log(nextProps);
         
         if(nextProps && nextProps.editing) {
             this.setState({
@@ -59,7 +68,7 @@ class TaskForm extends Component {
     }
 
     render() {
-       
+        console.log(this.props.editing);
         return (          
             <Formik
                 enableReinitialize  
@@ -127,12 +136,12 @@ const mapStateToProps = (state) => {
        openForm: () => { 
           dispatch(actions.openForm()) 
        },
-       addTask: (task) => { 
-        dispatch(actions.addTask(task)) 
+       AddTaskRequest: (task) => { 
+        dispatch(actions.AddTaskRequest(task)) 
        },
-      
- 
- 
+       UpdateTaskRequest:(task) => {
+        dispatch(actions.UpdateTaskRequest(task))
+       }
     }
  }
  

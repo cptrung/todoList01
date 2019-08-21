@@ -1,24 +1,8 @@
 import * as types from './../contants/actionTypes';
 import  randomstring  from 'randomstring';
 
-var initialState = [
-    {
-        id:1,
-        name:'Tìm thấy mãnh vỡ máy bay ở Iran làm 66 người chết',
-        level:'Hight'
-    },
-    {
-        id:2,
-        name:'Không còn cướp lộc xe hoa ở giáng sinh 2018',
-        level:'Small'
-    },
-    {
-        id:3,
-        name:'Hơn 3700 người nhập viện vì đốt phao',
-        level:'Medium'
-    }
-]
-
+var initialState = []
+// func find index task in tasks
 var findIndex = (tasks, id) => {
     var index = -1;
     tasks.forEach((task, i) => {
@@ -31,34 +15,59 @@ var findIndex = (tasks, id) => {
 
 const tasks = (state = initialState, action) => {
     switch (action.type) {
-        case types.LIST_ALL:
+        // all list 
+        case types.API_CALL_REQUEST:
+            return [];
+
+        case types.API_CALL_SUCCESS:
+            return action.data;
+
+        case types.API_CALL_FAILURE:
+            return [];
+        
+         // add task   
+        case types.ADD_TASK:
             return [...state];
 
-        case types.SAVE_TASK:
-            if(action.task.id){   
-                return [
-                    ...state.slice(0, findIndex(state,action.task.id)),
-                    {
-                        ...action.task,
-                        name:action.task.name,
-                        level: action.task.level
-                    },
-                    ...state.slice(findIndex(state,action.task.id) + 1)
-                ]
-            }
-            else{
-                action.task.id = randomstring.generate(7);
-                return [...state, action.task];
-            }
-           
-        
-        case types.DELETE_TASK:
-            
-                return [
-                    ...state.slice(0, findIndex(state,action.id)),
-                    ...state.slice(findIndex(state,action.id) + 1)
-                    ]
+        case types.ADD_TASK_SUCCESS:
+            return [
+                ...state,
+                action.data
+            ];
+        case types.ADD_TASK_FAILURE:
+            return [...state];
+
+        // update task
+         case types.UPDATE_TASK:
+            return [...state];
+
+        case types.UPDATE_TASK_SUCCESS:
                    
+            return [
+                ...state.slice(0, findIndex(state,action.task.id)),
+                {
+                    ...action.task, name:action.task.name, level: action.task.level 
+                },
+                ...state.slice(findIndex(state,action.task.id) + 1)
+            ];
+
+        case types.UPDATE_TASK_FAILURE:
+            return [...state];
+
+        // delete task
+        case types.DELETE_TASK:
+           
+            return [...state];
+
+        case types.DELETE_TASK_SUCCESS:
+             return [
+            ...state.slice(0, findIndex(state,action.id)),
+            ...state.slice(findIndex(state,action.id) + 1)
+            ]
+
+        case types.DELETE_TASK_FAILURE:
+            return [...state];
+         
         default:
             return [...state];
     }

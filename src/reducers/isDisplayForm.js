@@ -10,7 +10,6 @@ const isDisplayForm = (state = initialState, action) => {
             return true;
         case types.CLOSE_FORM:
             return false;
-
         default:
             return state;
     }
