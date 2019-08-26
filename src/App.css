@@ -158,3 +158,26 @@ input {
   color: red;
   font-size: 20px;
 }
+
+/* loading */
+
+
+.loading{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 99;
+  background: #333333e0;
+
+}
+
+.icon-loading{
+  position: fixed;
+  width: 100px;
+  top: 48%;
+  left: 48%;
+  /* margin-right: auto;
+  margin-left: auto; */
+}

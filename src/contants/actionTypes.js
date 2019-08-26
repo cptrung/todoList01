@@ -39,3 +39,8 @@ export const SEARCH_TASK_FAILURE = "SEARCH_TASK_FAILURE";
 export const SORT_TASK = "SORT_TASK";
 export const SORT_TASK_SUCCESS = "SORT_TASK_SUCCESS";
 export const SORT_TASK_FAILURE = "SORT_TASK_FAILURE";
+
+// loading
+
+export const SHOW_LOADING = "SHOW_LOADING";
+export const HIDDEN_LOADING = "HIDDEN_LOADING";

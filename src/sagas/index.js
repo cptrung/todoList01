@@ -1,17 +1,21 @@
 
-import { fork,put, takeLatest } from 'redux-saga/effects'
+import { fork,put, takeLatest, delay } from 'redux-saga/effects'
 import { api } from './api';
 import * as types from './../contants/actionTypes';
+import * as actions from './../actions/index';
 
 // func fetch list
 function* fetchTodoList(){
 	try{
 		const response = yield (api.fetchTodolist());
+		yield put(actions.ShowLoading());
     	const data = response.data;
 		yield put({
 			type:types.API_CALL_SUCCESS,
 			data
 		})
+		yield delay(500);
+		yield put(actions.HiddenLoading());
 	} 
 	catch(err){
 		yield put({
@@ -19,17 +23,21 @@ function* fetchTodoList(){
 			err
 		})
 	}
+	yield put(actions.HiddenLoading());
 }
 
 // func add task
 function* addTask(action){
 	try {
 		const {task} = action;
+		yield put(actions.ShowLoading());
 		const response = yield (api.insertNewTaskAPI(task));
 		yield put({
 			type:types.ADD_TASK_SUCCESS,
 			data : response.data
 		})
+		yield delay(500);
+		yield put(actions.HiddenLoading());
 	}
 	catch(err){
 		yield put({
@@ -45,10 +53,13 @@ function* DeleteTask(action){
 	try {
 		const {id} = action;
 		const response = yield (api.deleteTaskAPI(id));
+		yield put(actions.ShowLoading());
 		yield put({
 			type:types.DELETE_TASK_SUCCESS,
 			id : response.data.id
 		})
+		yield delay(500);
+		yield put(actions.HiddenLoading());
 	}
 	catch(err){
 		yield put({
@@ -64,11 +75,14 @@ function* UpdateTask(action){
 		const {task} = action;
 		
 		const response = yield (api.updateTaskAPI(task));
+		yield put(actions.ShowLoading());
 	
 		yield put({
 			type:types.UPDATE_TASK_SUCCESS,
 			task : response.data
 		})
+		yield delay(700);
+		yield put(actions.HiddenLoading());
 	}
 	catch(err){
 		yield put({

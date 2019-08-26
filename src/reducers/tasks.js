@@ -1,5 +1,4 @@
 import * as types from './../contants/actionTypes';
-import  randomstring  from 'randomstring';
 
 var initialState = []
 // func find index task in tasks

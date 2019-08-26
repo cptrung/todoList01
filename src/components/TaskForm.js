@@ -17,7 +17,6 @@ class TaskForm extends Component {
    }
 
     onSubmit = ( fields ) => {
-        console.log(fields);
         if(fields.id === '') {
             this.props.AddTaskRequest(fields);
             this.props.closeForm();
@@ -39,9 +38,7 @@ class TaskForm extends Component {
     }
 
     componentWillMount(){
-        console.log(this.props.editing);
-        if(this.props.editing && this.props.editing.id != null ) {
-            console.log(this.props.editing);
+        if(this.props.editing && this.props.editing.id != null ) { 
             this.setState({
                 id:this.props.editing.id,
                 name:this.props.editing.name,
@@ -52,9 +49,7 @@ class TaskForm extends Component {
         }
     }
     
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-        
+    componentWillReceiveProps(nextProps){   
         if(nextProps && nextProps.editing) {
             this.setState({
                 id:nextProps.editing.id,
@@ -68,7 +63,6 @@ class TaskForm extends Component {
     }
 
     render() {
-        console.log(this.props.editing);
         return (          
             <Formik
                 enableReinitialize  

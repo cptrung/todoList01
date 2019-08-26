@@ -5,11 +5,13 @@ import isDisplayForm from './isDisplayForm';
 import editing from './editing';
 import search from './search';
 import sort from './sort'
+import loading from './loading';
 const myReducer = combineReducers({
     tasks,
     isDisplayForm,
     editing,
     search,
-    sort
+    sort,
+    loading
 })
 export default myReducer;

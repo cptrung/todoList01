@@ -69,7 +69,6 @@ export const DeleteTaskFail = (error) => {
 // taskedtiting
 
 export const TaskEditingRequest = (task) => {
-    console.log(task);
     return {
         type:types.TAKS_EDITING,
         task
@@ -171,4 +170,16 @@ export const sortTaskFail = (err) => {
         err
     }
 }
+
+export const ShowLoading = () => {
+    return {
+        type:types.SHOW_LOADING
+    }
+}
+export const HiddenLoading = () => {
+    return {
+        type:types.HIDDEN_LOADING
+    }
+}
+
 

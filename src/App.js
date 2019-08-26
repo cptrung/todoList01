@@ -5,6 +5,7 @@ import * as actions from './actions/index';
 import TaskList from './components/TaskList';
 import TaskControl from './components/TaskControl';
 import TaskForm from './components/TaskForm';
+import Loading from './components/Loading';
 
 import './App.css';
 
@@ -26,10 +27,12 @@ class App extends Component {
 
    }
    render() {
-      
+
       return (
          <div className="App">
             <div className="container">
+               {/*loading */}
+               {this.props.loading.showLoading ? <Loading/>:''}
                <div className="title">
                   <h2>Project01-ToDo List</h2>
                   <h3 className="custom-title-small">React JS</h3>
@@ -60,7 +63,8 @@ const mapStateToProps = (state) => {
    return {
       tasks: state.tasks,
       isDisplayForm: state.isDisplayForm,
-      editing:state.editing
+      editing:state.editing,
+      loading:state.loading
    }
 }
 const mapDispatchToProps = (dispatch, props) => {
