@@ -14,7 +14,7 @@ class TaskList extends Component {
          // search item
          if(keyword !== ''){
             listItem = listItem.filter((task) => {
-               return task.name.toLowerCase().indexOf(keyword) === -1;
+               return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
             })
          }
          // sort item by name

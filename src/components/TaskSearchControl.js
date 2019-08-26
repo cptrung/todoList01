@@ -36,7 +36,7 @@ class TaskSearchControl extends Component {
                     />
                     <div className="input-group-btn">
                         <button onClick = {this.onSearChTaks} className="btn btn-info" type="submit">
-                            <span >Clear</span>
+                            <span >Search</span>
                         </button>
                     </div>
                 </div>

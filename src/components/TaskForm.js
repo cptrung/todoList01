@@ -17,6 +17,7 @@ class TaskForm extends Component {
    }
 
     onSubmit = ( fields ) => {
+
         if(fields.id === '') {
             this.props.AddTaskRequest(fields);
             this.props.closeForm();
@@ -70,7 +71,8 @@ class TaskForm extends Component {
                 validationSchema={Yup.object().shape({
                     name: Yup.string()
                         .required(' Name is required')
-                        .min(3, 'Password must be at least 3 characters'),                
+                        .trim()
+                        .min(3, 'Name must be at least 3 characters'),       
                 })}
                 onSubmit={this.onSubmit}               
                 render={({ errors, status, touched }) => (
