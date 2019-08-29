@@ -44,3 +44,19 @@ export const SORT_TASK_FAILURE = "SORT_TASK_FAILURE";
 
 export const SHOW_LOADING = "SHOW_LOADING";
 export const HIDDEN_LOADING = "HIDDEN_LOADING";
+
+
+// login
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS =  'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const SAVE_TOKEN ='SAVE_TOKEN';
+export const LOGOUT = 'LOGOUT';
+export const DELETE_TOKEN ='DELETE_TOKEN';
+
+// status
+
+export const _LOGGED_IN = 'Logged in';
+export const _LOGGED_OUT = 'Logged out';
+export const _LOGIN_ERROR = 'Wrong password and account not exsit!';

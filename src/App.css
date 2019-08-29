@@ -181,3 +181,19 @@ input {
   /* margin-right: auto;
   margin-left: auto; */
 }
+
+.mt-10{
+  margin-top: 10px;
+}
+.ml-10{
+  margin-left: 10px;
+}
+.login-customs-mt{
+  margin-top: 200px;
+}
+.username{
+    width: 65px;
+    height: 42px;
+    margin-top: 18px;
+    margin-left: 500px;
+}

@@ -1,6 +1,6 @@
 import * as types from './../contants/actionTypes';
-
-var initialState = []
+import _ from 'lodash';
+var initialState = [];
 // func find index task in tasks
 var findIndex = (tasks, id) => {
     var index = -1;
@@ -41,14 +41,20 @@ const tasks = (state = initialState, action) => {
             return [...state];
 
         case types.UPDATE_TASK_SUCCESS:
-                   
+            // using lodash find id of task
+            var index = _.findIndex(state,(task) =>{
+                return task.id === action.task.id
+            })
+           
             return [
-                ...state.slice(0, findIndex(state,action.task.id)),
+                ...state.slice(0, index),
                 {
                     ...action.task, name:action.task.name, level: action.task.level 
                 },
-                ...state.slice(findIndex(state,action.task.id) + 1)
+                ...state.slice(index + 1)
             ];
+           
+
 
         case types.UPDATE_TASK_FAILURE:
             return [...state];
@@ -59,6 +65,7 @@ const tasks = (state = initialState, action) => {
             return [...state];
 
         case types.DELETE_TASK_SUCCESS:
+            
              return [
             ...state.slice(0, findIndex(state,action.id)),
             ...state.slice(findIndex(state,action.id) + 1)

@@ -6,12 +6,14 @@ import editing from './editing';
 import search from './search';
 import sort from './sort'
 import loading from './loading';
+import login from './login'
 const myReducer = combineReducers({
     tasks,
     isDisplayForm,
     editing,
     search,
     sort,
-    loading
+    loading,
+    login
 })
 export default myReducer;

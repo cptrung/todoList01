@@ -182,4 +182,47 @@ export const HiddenLoading = () => {
     }
 }
 
+//login
+export const LoginRequest = (username,password) => {
+    return {
+        type:types.LOGIN_REQUEST,
+        username,
+        password
+    }
+}
+
+export const LoginSuccess = () => {
+    return {
+        type:types.LOGIN_SUCCESS,
+       
+    }
+}
+
+export const LoginError = (err) => {
+    return {
+        type:types.LOGIN_ERROR,
+        err
+    }
+}
+
+export const SaveTokens = (token) => {
+    console.log(token);
+    return {
+        type:types.SAVE_TOKEN,
+        token
+    }
+}
+
+//logout
+export const Logout = () => {
+    return {
+        type:types.LOGOUT
+    }
+}
+
+export const DeleteTokens = () => {
+    return {
+        type:types.DELETE_TOKEN
+    }
+}
 
