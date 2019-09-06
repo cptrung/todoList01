@@ -32,8 +32,11 @@ function* fetchTodoList() {
 function* addTask(action) {
 	try {
 		const { task } = action;
+		//const newTask = JSON.stringify({name:task.name, level:task.level});
+		const newTask = {name:task.name, level:task.level};
+		console.log(newTask);
 		yield put(actions.ShowLoading());
-		const response = yield (api.insertNewTaskAPI(task));
+		const response = yield (api.insertNewTaskAPI(newTask));
 		yield put({
 			type: types.ADD_TASK_SUCCESS,
 			data: response.data
@@ -53,12 +56,13 @@ function* addTask(action) {
 function* DeleteTask(action) {
 
 	try {
-		const { id } = action;
-		const response = yield (api.deleteTaskAPI(id));
+		const { _id } = action;
+		const response = yield (api.deleteTaskAPI(_id));
+		console.log(response.data);
 		yield put(actions.ShowLoading());
 		yield put({
 			type: types.DELETE_TASK_SUCCESS,
-			id: response.data.id
+			_id
 		})
 		yield delay(500);
 		yield put(actions.HiddenLoading());
@@ -75,12 +79,14 @@ function* DeleteTask(action) {
 function* UpdateTask(action) {
 	try {
 		const { task } = action;
+		console.log(action);
 		const response = yield (api.updateTaskAPI(task));
+		console.log(response);
 		yield put(actions.ShowLoading());
 		yield delay(600);
 		yield put({
 			type: types.UPDATE_TASK_SUCCESS,
-			task: response.data
+			task: action.task
 		})
 
 		yield put(actions.HiddenLoading());

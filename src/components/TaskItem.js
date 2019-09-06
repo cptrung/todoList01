@@ -8,8 +8,9 @@ import * as actions from './../actions/index';
 class TaskItem extends Component {
 
     onDeleteTask = (task) => {
+        console.log(task._id);
         if(window.confirm('Confirm deleting the task tapping OK or Cancel if don’t want to delete the task')){
-          this.props.DeleteTaskRequest(task.id);
+          this.props.DeleteTaskRequest(task._id);
         }
     }
 
@@ -52,8 +53,8 @@ const mapStateToProps = (state) => {
        openForm: () => { 
           dispatch(actions.openForm()) 
        },
-       DeleteTaskRequest: (id) => { 
-        dispatch(actions.DeleteTaskRequest(id)) 
+       DeleteTaskRequest: (_id) => { 
+        dispatch(actions.DeleteTaskRequest(_id)) 
        },
        TaskEditingRequest: (task) => { 
         dispatch(actions.TaskEditingRequest(task)) 

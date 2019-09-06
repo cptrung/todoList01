@@ -10,15 +10,15 @@ class TaskForm extends Component {
    constructor(props) {
        super(props);
        this.state={
-        id:"",
+        _id:"",
         name: '',
         level: 'Medium'
        }
    }
 
     onSubmit = ( fields ) => {
-
-        if(fields.id === '') {
+        console.log(fields);
+        if(fields._id === '') {
             this.props.AddTaskRequest(fields);
             this.props.closeForm();
         }else{
@@ -32,16 +32,17 @@ class TaskForm extends Component {
 
     onClearFields = () => {
         this.setState({
-            id:"",
+            _id:"",
             name: '',
             level: 'Medium' 
         })
     }
 
     componentWillMount(){
-        if(this.props.editing && this.props.editing.id != null ) { 
+        console.log(this.props.editing);
+        if(this.props.editing && this.props.editing._id != null ) { 
             this.setState({
-                id:this.props.editing.id,
+                _id:this.props.editing._id,
                 name:this.props.editing.name,
                 level:this.props.editing.level
             })
@@ -53,7 +54,7 @@ class TaskForm extends Component {
     componentWillReceiveProps(nextProps){   
         if(nextProps && nextProps.editing) {
             this.setState({
-                id:nextProps.editing.id,
+                _id:nextProps.editing._id,
                 name:nextProps.editing.name,
                 level:nextProps.editing.level
             })
@@ -64,6 +65,7 @@ class TaskForm extends Component {
     }
 
     render() {
+        console.log(this.state);
         return (          
             <Formik
                 enableReinitialize  
@@ -78,7 +80,7 @@ class TaskForm extends Component {
                 render={({ errors, status, touched }) => (
                     <div className="panel panel-info">
                     <div className="panel-heading">
-                        <h3 className="panel-title">{this.state.id  ? 'Edit Item': 'Add Item'}</h3>
+                        <h3 className="panel-title">{this.state._id  ? 'Edit Item': 'Add Item'}</h3>
                         <h3 onClick = {this.props.closeForm} className="panel-title custom-times">x</h3>
                     </div>
                     <div className="panel-body">

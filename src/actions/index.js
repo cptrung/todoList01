@@ -45,17 +45,17 @@ export const AddTaskFail = (error) => {
 
 // delete a task in listask
 
-export const DeleteTaskRequest = (id) => {
+export const DeleteTaskRequest = (_id) => {
     return {
         type:types.DELETE_TASK,
-        id
+        _id
     }
 }
 
-export const DeleteTaskSuccess = (id) => {
+export const DeleteTaskSuccess = (_id) => {
     return {
         type:types.DELETE_TASK_SUCCESS,
-        id
+        _id
     }
 }
 

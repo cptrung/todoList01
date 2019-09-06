@@ -19,7 +19,7 @@ class loginPage extends Component {
             this.props.history.push('/');
         }
     }
-
+    
     componentWillReceiveProps(nextProps) {
         const token = localStorage.getItem('token');
         if (token) {

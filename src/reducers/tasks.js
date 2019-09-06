@@ -5,7 +5,7 @@ var initialState = [];
 var findIndex = (tasks, id) => {
     var index = -1;
     tasks.forEach((task, i) => {
-        if(task.id === id){
+        if(task._id === id){
             index = i;
         }
     });
@@ -29,6 +29,7 @@ const tasks = (state = initialState, action) => {
             return [...state];
 
         case types.ADD_TASK_SUCCESS:
+            console.log(action);
             return [
                 ...state,
                 action.data
@@ -42,9 +43,17 @@ const tasks = (state = initialState, action) => {
 
         case types.UPDATE_TASK_SUCCESS:
             // using lodash find id of task
+            console.log(action);
             var index = _.findIndex(state,(task) =>{
-                return task.id === action.task.id
+                return task._id === action.task._id
             })
+            console.log([
+                ...state.slice(0, index),
+                {
+                    ...action.task, name:action.task.name, level: action.task.level 
+                },
+                ...state.slice(index + 1)
+            ]);
            
             return [
                 ...state.slice(0, index),
@@ -61,14 +70,14 @@ const tasks = (state = initialState, action) => {
 
         // delete task
         case types.DELETE_TASK:
-           
+            console.log(action);
             return [...state];
 
         case types.DELETE_TASK_SUCCESS:
-            
+            console.log(action._id);
              return [
-            ...state.slice(0, findIndex(state,action.id)),
-            ...state.slice(findIndex(state,action.id) + 1)
+            ...state.slice(0, findIndex(state,action._id)),
+            ...state.slice(findIndex(state,action._id) + 1)
             ]
 
         case types.DELETE_TASK_FAILURE:
