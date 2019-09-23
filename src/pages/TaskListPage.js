@@ -32,10 +32,11 @@ class TaskListPage extends Component {
     }
     return result;
   };
+
   componentDidMount() {
     this.props.CallAPIRequest();
   }
-
+  
   render() {
     const { tasks } = this.props;
     return (
@@ -65,7 +66,8 @@ const mapStateToProps = state => {
   return {
     tasks: state.tasks,
     search: state.search,
-    sort: state.sort
+    sort: state.sort,
+    login: state.login
   };
 };
 const mapDispatchToProps = (dispatch, props) => {

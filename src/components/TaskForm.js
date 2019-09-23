@@ -34,32 +34,54 @@ class TaskForm extends Component {
       level: "Medium"
     });
   };
+  
 
-  componentWillMount() {
-    if (this.props.editing && this.props.editing._id != null) {
-      this.setState({
-        _id: this.props.editing._id,
-        name: this.props.editing.name,
-        level: this.props.editing.level
-      });
+  // UNSAFE_componentWillMount() {
+  //   if (this.props.editing && this.props.editing._id != null) {
+  //     this.setState({
+  //       _id: this.props.editing._id,
+  //       name: this.props.editing.name,
+  //       level: this.props.editing.level
+  //     });
+  //   } else {
+  //     this.onClearFields();
+  //   }
+  // }
+
+
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   if (nextProps && nextProps.editing) {
+  //     this.setState({
+  //       _id: nextProps.editing._id,
+  //       name: nextProps.editing.name,
+  //       level: nextProps.editing.level
+  //     });
+  //   } else {
+  //     this.onClearFields();
+  //   }
+  // }
+  static getDerivedStateFromProps(props, state){
+    console.log(props);
+      if (props && props.editing) {
+      // this.setState({
+      //   _id: props.editing._id,
+      //   name: props.editing.name,
+      //   level: props.editing.level
+      // });
+      return {
+        _id: props.editing._id,
+        name: props.editing.name,
+        level: props.editing.level
+      }
     } else {
       this.onClearFields();
+      return null;
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps && nextProps.editing) {
-      this.setState({
-        _id: nextProps.editing._id,
-        name: nextProps.editing.name,
-        level: nextProps.editing.level
-      });
-    } else {
-      this.onClearFields();
-    }
-  }
 
   render() {
+    console.log(this.state);
     return (
       <Formik
         enableReinitialize

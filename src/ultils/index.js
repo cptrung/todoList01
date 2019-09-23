@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const url = 'http://5d3ea855139f4200145328c1.mockapi.io/api/login/';
+//const url = 'http://5d3ea855139f4200145328c1.mockapi.io/api/login/';
+const url= "http://localhost:4000/userlogin";
 //get all user
 export function fetchAllUser(){
   return axios({

@@ -6,14 +6,14 @@ const routes = [
     {
         path:'/',
         exact:true,
-        main: ({history}) => <HomePage  history={history}/>
+        main: ({history,location}) => <HomePage   history={history} location={location}/>
     },
     {
         path:'/login',
         exact:false,
         main: ({location,history}) => <LoginPage history={history} location={location}/>
-    },   
-    
+    },
+      
 ];
 
 export default routes;

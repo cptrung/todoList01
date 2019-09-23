@@ -1,25 +1,15 @@
-import {
-  fork,
-  put,
-  takeLatest,
-  delay,
-  call,
-  cancelled,
-  take,
-  cancel
-} from "redux-saga/effects";
-import { api } from "./api";
+import { fork, put, takeLatest, delay } from "redux-saga/effects";
+import { taskApi } from "./../ultils/taskApi";
+import { authUserApi } from "./../ultils/authUserApi";
 import * as types from "./../contants/actionTypes";
 import * as actions from "./../actions/index";
-import { fetchAllUser, fetchUserByID } from "./../ultils/index";
-import _ from "lodash";
 
 // func fetch list
 function* fetchTodoList() {
   try {
-    const response = yield api.fetchTodolist();
-    yield put(actions.ShowLoading());
+    const response = yield taskApi.fetchTodolist();
     const data = response.data;
+    yield put(actions.ShowLoading());
     yield put({
       type: types.API_CALL_SUCCESS,
       data
@@ -39,11 +29,11 @@ function* fetchTodoList() {
 function* addTask(action) {
   try {
     const { task } = action;
-    //const newTask = JSON.stringify({name:task.name, level:task.level});
     const newTask = { name: task.name, level: task.level };
 
     yield put(actions.ShowLoading());
-    const response = yield api.insertNewTaskAPI(newTask);
+    yield delay(400);
+    const response = yield taskApi.insertNewTaskAPI(newTask);
     yield put({
       type: types.ADD_TASK_SUCCESS,
       data: response.data
@@ -57,14 +47,14 @@ function* addTask(action) {
     });
   }
 }
-
 // func delete task
 function* DeleteTask(action) {
   try {
     const { _id } = action;
-    const response = yield api.deleteTaskAPI(_id);
+    yield taskApi.deleteTaskAPI(_id);
 
     yield put(actions.ShowLoading());
+    yield delay(400);
     yield put({
       type: types.DELETE_TASK_SUCCESS,
       _id
@@ -84,7 +74,7 @@ function* UpdateTask(action) {
   try {
     const { task } = action;
 
-    const response = yield api.updateTaskAPI(task);
+    yield taskApi.updateTaskAPI(task);
 
     yield put(actions.ShowLoading());
     yield delay(600);
@@ -147,33 +137,29 @@ function* SortTask(action) {
 }
 // login
 
-const findIndex = (data, username) => {
-  var index = -1;
-  data.forEach((user, i) => {
-    if (user.username === username) {
-      index = i;
-    }
-  });
-  return index;
-};
+// const findIndex = (data, username) => {
+//   var index = -1;
+//   data.forEach((user, i) => {
+//     if (user.username === username) {
+//       index = i;
+//     }
+//   });
+//   return index;
+// };
 
 //login
 export function* authorize(action) {
   try {
-    const res = yield fetchAllUser();
-    const index = findIndex(res.data, action.username);
-    const user = yield fetchUserByID(res.data[index].id);
-    const { token } = user.data;
-    if (
-      user.data.username === action.username &&
-      user.data.password === action.password
-    ) {
-      localStorage.setItem("token", token);
-      yield put(actions.LoginSuccess());
+    const res = yield authUserApi.getTokensAuth(action);
+    var token = res.data.access_token;
+    if (res.status === 200) {
+ 
       yield put(actions.SaveTokens(token));
+      yield put(actions.LoginSuccess());
     } else {
       yield put(actions.SaveTokens((token = null)));
     }
+   
   } catch (error) {
     yield put({ type: "LOGIN_ERROR", error });
   }
@@ -215,6 +201,7 @@ function* watchLogout() {
 }
 
 export default function* rootSaga() {
+  yield fork(watchLogin);
   yield fork(watchFectTodoList);
   yield fork(watchAddTask);
   yield fork(watchDeleteTask);
@@ -222,6 +209,5 @@ export default function* rootSaga() {
   yield fork(watchUpdateTask);
   yield fork(watchSeachTask);
   yield fork(watchSortTask);
-  yield fork(watchLogin);
   yield fork(watchLogout);
 }
