@@ -8,7 +8,7 @@ import * as actions from "./../actions/index";
 function* fetchTodoList() {
   try {
     const response = yield taskApi.fetchTodolist();
-    const data = response.data;
+    const data = response.data ? response.data:[] ;
     yield put(actions.ShowLoading());
     yield put({
       type: types.API_CALL_SUCCESS,
@@ -30,10 +30,10 @@ function* addTask(action) {
   try {
     const { task } = action;
     const newTask = { name: task.name, level: task.level };
-
     yield put(actions.ShowLoading());
     yield delay(400);
     const response = yield taskApi.insertNewTaskAPI(newTask);
+    console.log(response);
     yield put({
       type: types.ADD_TASK_SUCCESS,
       data: response.data
@@ -51,6 +51,7 @@ function* addTask(action) {
 function* DeleteTask(action) {
   try {
     const { _id } = action;
+    console.log(action);
     yield taskApi.deleteTaskAPI(_id);
 
     yield put(actions.ShowLoading());

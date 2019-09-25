@@ -16,7 +16,7 @@ class TaskForm extends Component {
   }
 
   onSubmit = fields => {
-    if (fields._id === "") {
+    if (!fields._id ) {
       this.props.AddTaskRequest(fields);
       this.props.closeForm();
     } else {
@@ -61,7 +61,6 @@ class TaskForm extends Component {
   //   }
   // }
   static getDerivedStateFromProps(props, state){
-    console.log(props);
       if (props && props.editing) {
       // this.setState({
       //   _id: props.editing._id,
@@ -81,7 +80,6 @@ class TaskForm extends Component {
 
 
   render() {
-    console.log(this.state);
     return (
       <Formik
         enableReinitialize
@@ -149,7 +147,7 @@ const mapStateToProps = state => {
   return {
     tasks: state.tasks,
     isDisplayForm: state.isDisplayForm,
-    editing: state.editing
+    editing: state.tasks.editing
   };
 };
 const mapDispatchToProps = (dispatch, props) => {

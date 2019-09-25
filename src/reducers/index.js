@@ -9,10 +9,10 @@ import loading from './loading';
 import login from './login'
 const myReducer = combineReducers({
     tasks,
-    isDisplayForm,
-    editing,
-    search,
-    sort,
+   // isDisplayForm,
+    //editing,
+    // search,
+    // sort,
     loading,
     login
 })

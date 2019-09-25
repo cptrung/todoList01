@@ -38,7 +38,7 @@ class TaskListPage extends Component {
   }
   
   render() {
-    const { tasks } = this.props;
+    const { tasks } = this.props.data;
     return (
       <div className="row mt-30">
         <div className="panel panel-info panel-info-custom">
@@ -64,9 +64,9 @@ class TaskListPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    tasks: state.tasks,
-    search: state.search,
-    sort: state.sort,
+    data: state.tasks,
+    search: state.tasks.keyword,
+    sort: state.tasks.sort,
     login: state.login
   };
 };

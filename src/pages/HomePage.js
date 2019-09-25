@@ -70,7 +70,7 @@ class HomePage extends Component {
 const mapStateToProps = state => {
   return {
     tasks: state.tasks,
-    isDisplayForm: state.isDisplayForm,
+    isDisplayForm: state.tasks.isDisplayForm,
     editing: state.editing,
     loading: state.loading
   };
